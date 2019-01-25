@@ -96,73 +96,11 @@
             }
 
         </style>
+        <script src="script.js"></script>
     </head>
     <body onload="startApp()">
         
         <div id="wrapper">
         </div>
-
-
-        <script type="text/javascript">
-            function startApp()
-            {
-                loadMenuScreen();
-
-
-
-                //createNewGame();
-            }
-
-            function loadMenuScreen()
-            {
-                var wrapper = document.getElementById("wrapper");
-                wrapper.removeChild(wrapper.firstChild);
-                
-                wrapper.innerHTML = ''
-                +'<div id="menu-screen">'
-                +'  <div id="title">'
-                +'      <div id="title-top">The</div>'
-                +'      <div id="title-bottom">Cash Game</div> '
-                +'  </div>'
-                +'  <button id="start-button" onclick="startGameFromMenu()">Start Game</button>'
-                +'  <div id="number-of-dots-selector-box">'
-                +'      Number of Dots:</br>'
-                +'      <input id="number-of-dots-selector" type="number" name="num_of_dots" min="2" max="10" value="2">'
-                +'  </div>'
-                +'  <div id="difficulty-selector-box">'
-                +'      Difficulty:</br>'
-                +'      <select id="difficulty-selector">'
-                +'         <option value="easy">Easy</option>'
-                +'         <option value="medium">Medium</option>'
-                +'         <option value="hard">Hard</option>'
-                +'         <option value="impossible">Probably Impossible</option>'
-                +'      </select>'
-                +'  </div>'
-                +'</div>';
-            }
-
-            function loadGameScreen()
-            {
-                var wrapper = document.getElementById("wrapper");
-                wrapper.removeChild(wrapper.firstChild)
-
-                wrapper.innerHTML = ''
-                +'<div id="game-screen">'
-                +'</div>';
-            }
-
-            function startGameFromMenu()
-            {
-                startGame(document.getElementById("number-of-dots-selector").value, document.getElementById("difficulty-selector").value);
-            }
-
-            function startGame(num_of_dots, difficulty)
-            {
-                console.log("Starting Game with NumDots="+num_of_dots+" & Difficulty="+difficulty);
-
-                loadGameScreen();
-                
-            }
-        </script>
     </body>
 </html>
