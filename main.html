@@ -1,0 +1,135 @@
+<html>
+    <head>
+        <style media="screen">
+            html, body, #wrapper
+            {
+                height: 100%;
+                width: 100%;
+                margin: 0;
+                padding: 0;
+            }
+
+            #wrapper
+            {
+                background-color: #dba143;
+            }
+
+            #title
+            {
+                position: absolute;
+                left: 50%;
+                top: 34%;
+                transform: translate(-50%, -50%);             
+                height:200px;
+                width: 1000px;
+                color: black;
+                font-weight: 600;
+                text-align: center;
+                vertical-align: middle;
+            }
+
+            #title-top
+            {
+                position: absolute;
+                top: 0;
+                left: 0;
+                font-family: 'Times New Roman';
+                font-size: 30px;
+                height:30px;
+                width: 1000px;   
+                transform:translate(10px, 0px);      
+            }
+
+            #title-bottom
+            {
+                position: absolute;
+                top:0px;
+                height:200px;
+                width: 1000px;
+                font-size: 170px;
+                font-family: 'Brush Script MT', 'Brush Script Std', cursive;   
+            }
+
+
+            #start-button
+            {
+                height:50px;
+                width:300px;
+                position: absolute;
+                left: 50%;
+                top: calc(58%);
+                transform: translate(-50%, -50%);
+            }
+            #dots-selector
+            {
+                height:20px;
+                width:300px;
+                position: absolute;
+                left: 50%;
+                top: calc(70%);
+                transform: translate(-50%, -50%);
+            }
+            #difficult-selector
+            {
+                height:20px;
+                width:300px;
+                position: absolute;
+                left: 50%;
+                top: calc(82%);
+                transform: translate(-50%, -50%);
+            }
+
+        </style>
+    </head>
+    <body onload="startApp()">
+        <div id="wrapper">
+            
+        </div>
+
+        <script type="text/javascript">
+
+            function startApp()
+            {
+                loadMenuScreen();
+
+
+
+                //createNewGame();
+            }
+
+            function loadMenuScreen()
+            {
+                console.log("Running");
+                
+                
+                
+
+                document.getElementById("wrapper").innerHTML = 
+                    '<div id="title">'
+                +       '<div id="title-top">'
+                +           'The'     
+                +       '</div>'
+                +       '<div id="title-bottom">'
+                +           'Cash Game'
+                +       '</div> '
+                +   '</div>'
+                +   '<button id="start-button">'
+                +       'Start Game'
+                +   '</button>'
+                +   '<button id="dots-selector">'
+                +       'Number of Dots'
+                +   '</button>'
+                +   '<button id="difficult-selector">'
+                +       'Difficulty'
+                +   '</button>';
+                <input type="range" id="myRange" value="90">
+            }
+
+
+            //function createNewGame()
+            //{
+
+            //}
+        </script>
+    </body>
+</html>
