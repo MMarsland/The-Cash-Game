@@ -60,13 +60,15 @@ class App
 
     addNodeToScreen(node)
     {
-        console.log(node);
         var gameScreen = document.getElementById("game-screen");
-        gameScreen.innerHTML += '<div class="node" style="left: '+node.x+'%; top: '+node.y+'%"></div>';
-        for (connectionIndex in node.connections)
+        gameScreen.innerHTML += '<div class="node" style="left: '+node.x+'px; top: '+node.y+'px"></div>';
+        for (var connectionIndex in node.connections)
         {
             var connection = node.connections[connectionIndex];
-            
+            gameScreen.innerHTML += ''
+                +'<svg height="900" width="900">'
+                +'<polyline points="'+node.x+','+node.y+' '+connection.x+','+connection.y+'" style="fill:none;stroke:black;stroke-width:6"></polyline>'
+                +'</svg>';
         }
     }
 }
@@ -162,7 +164,7 @@ class Node
         var newNode;
         if (first)
         {
-            newNode = new Node(null, null, [50, 50]); 
+            newNode = new Node(null, null, [screen.width / 2 - 200, screen.height / 2]); 
         }
         else
         {
@@ -172,35 +174,35 @@ class Node
             {
                 case 0:
                     newNode.x = this.x;
-                    newNode.y = this.y - 20;
+                    newNode.y = this.y - 150;
                     break;
                 case 1:
-                    newNode.x = this.x + 20;
-                    newNode.y = this.y - 20;
+                    newNode.x = this.x + 150;
+                    newNode.y = this.y - 150;
                     break;
                 case 2:
-                    newNode.x = this.x +  20;
+                    newNode.x = this.x + 150;
                     newNode.y = this.y;
                     break;
                 case 3:
-                    newNode.x = this.x + 20;
-                    newNode.y = this.y + 20;
+                    newNode.x = this.x + 150;
+                    newNode.y = this.y + 150;
                     break;
                 case 4:
                     newNode.x = this.x;
-                    newNode.y = this.y + 20;
+                    newNode.y = this.y + 150;
                     break;
                 case 5:
-                    newNode.x = this.x - 20;
-                    newNode.y = this.y + 20;
+                    newNode.x = this.x - 150;
+                    newNode.y = this.y + 150;
                     break;
                 case 6:
-                    newNode.x = this.x - 20;
+                    newNode.x = this.x - 150;
                     newNode.y = this.y;
                     break;
                 case 7:
-                    newNode.x = this.x - 20;
-                    newNode.y = this.y - 20;
+                    newNode.x = this.x - 150;
+                    newNode.y = this.y - 150;
                     break;
             }
             while (true)
@@ -208,8 +210,6 @@ class Node
                 for (var nodeIndex in app.game.nodes)
                 {
                     var connected = Math.floor(Math.random() * 2);
-                    console.log(app.game.nodes[nodeIndex]);
-                    console.log(newNode);
                     if (connected == 0)
                     {
                         newNode.connections.push(app.game.nodes[nodeIndex]);
@@ -217,7 +217,7 @@ class Node
                     }
                 }
                 
-                if (newNode.connections != null)
+                if (newNode.connections != null && newNode.connections.length > 0)
                 {
                     break;
                 }
