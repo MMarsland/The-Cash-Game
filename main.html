@@ -9,11 +9,13 @@
                 padding: 0;
             }
 
-            #wrapper
+            /* Menu Screen */
+            #menu-screen
             {
                 background-color: #dba143;
+                height: 100%;
+                width: 100%;
             }
-
             #title
             {
                 position: absolute;
@@ -27,7 +29,6 @@
                 text-align: center;
                 vertical-align: middle;
             }
-
             #title-top
             {
                 position: absolute;
@@ -39,7 +40,6 @@
                 width: 1000px;   
                 transform:translate(10px, 0px);      
             }
-
             #title-bottom
             {
                 position: absolute;
@@ -49,45 +49,61 @@
                 font-size: 170px;
                 font-family: 'Brush Script MT', 'Brush Script Std', cursive;   
             }
-
-
             #start-button
             {
                 height:50px;
                 width:300px;
                 position: absolute;
                 left: 50%;
-                top: calc(58%);
+                top: 58%;
                 transform: translate(-50%, -50%);
             }
-            #dots-selector
+            #number-of-dots-selector-box
             {
                 height:20px;
-                width:300px;
+                width:200px;
+                text-align: center;
                 position: absolute;
                 left: 50%;
-                top: calc(70%);
+                top: 70%;
                 transform: translate(-50%, -50%);
             }
-            #difficult-selector
+            #number-of-dots-selector-box #number-of-dots-selector
+            {
+                width: 50px;
+                padding: 0px 0px 0px 15px;
+                text-align: center;
+                text-align-last: center;
+            }
+            #difficulty-selector-box
             {
                 height:20px;
-                width:300px;
+                width:150px;
+                text-align: center;
+                text-align-last: center;
                 position: absolute;
                 left: 50%;
-                top: calc(82%);
+                top: 82%;
                 transform: translate(-50%, -50%);
+            }
+            
+            /* Game Screen */
+            #game-screen
+            {
+                background-color: #dba143;
+                height: 100%;
+                width: 100%;
             }
 
         </style>
     </head>
     <body onload="startApp()">
+        
         <div id="wrapper">
-            
         </div>
 
-        <script type="text/javascript">
 
+        <script type="text/javascript">
             function startApp()
             {
                 loadMenuScreen();
@@ -99,37 +115,54 @@
 
             function loadMenuScreen()
             {
-                console.log("Running");
+                var wrapper = document.getElementById("wrapper");
+                wrapper.removeChild(wrapper.firstChild);
                 
-                
-                
-
-                document.getElementById("wrapper").innerHTML = 
-                    '<div id="title">'
-                +       '<div id="title-top">'
-                +           'The'     
-                +       '</div>'
-                +       '<div id="title-bottom">'
-                +           'Cash Game'
-                +       '</div> '
-                +   '</div>'
-                +   '<button id="start-button">'
-                +       'Start Game'
-                +   '</button>'
-                +   '<button id="dots-selector">'
-                +       'Number of Dots'
-                +   '</button>'
-                +   '<button id="difficult-selector">'
-                +       'Difficulty'
-                +   '</button>';
-                <input type="range" id="myRange" value="90">
+                wrapper.innerHTML = ''
+                +'<div id="menu-screen">'
+                +'  <div id="title">'
+                +'      <div id="title-top">The</div>'
+                +'      <div id="title-bottom">Cash Game</div> '
+                +'  </div>'
+                +'  <button id="start-button" onclick="startGameFromMenu()">Start Game</button>'
+                +'  <div id="number-of-dots-selector-box">'
+                +'      Number of Dots:</br>'
+                +'      <input id="number-of-dots-selector" type="number" name="num_of_dots" min="2" max="10" value="2">'
+                +'  </div>'
+                +'  <div id="difficulty-selector-box">'
+                +'      Difficulty:</br>'
+                +'      <select id="difficulty-selector">'
+                +'         <option value="easy">Easy</option>'
+                +'         <option value="medium">Medium</option>'
+                +'         <option value="hard">Hard</option>'
+                +'         <option value="impossible">Probably Impossible</option>'
+                +'      </select>'
+                +'  </div>'
+                +'</div>';
             }
 
+            function loadGameScreen()
+            {
+                var wrapper = document.getElementById("wrapper");
+                wrapper.removeChild(wrapper.firstChild)
 
-            //function createNewGame()
-            //{
+                wrapper.innerHTML = ''
+                +'<div id="game-screen">'
+                +'</div>';
+            }
 
-            //}
+            function startGameFromMenu()
+            {
+                startGame(document.getElementById("number-of-dots-selector").value, document.getElementById("difficulty-selector").value);
+            }
+
+            function startGame(num_of_dots, difficulty)
+            {
+                console.log("Starting Game with NumDots="+num_of_dots+" & Difficulty="+difficulty);
+
+                loadGameScreen();
+                
+            }
         </script>
     </body>
 </html>
