@@ -5,7 +5,7 @@ html, body, #wrapper
     margin: 0;
     padding: 0;
 }
-
+/* Samsung S8 => PIXELS = 1440 x 2960, VIEWPORT = 360 x 740 */
 /* Menu Screen */
 #menu-screen
 {
@@ -18,10 +18,10 @@ html, body, #wrapper
 {
     position: absolute;
     left: 50%;
-    top: 300px;
+    top: 200px;
     transform: translate(-50%, -50%);             
     height:200px;
-    width: 1000px;
+    width: 740px;
     color: black;
     font-weight: 600;
     text-align: center;
@@ -33,9 +33,9 @@ html, body, #wrapper
     top: 0;
     left: 0;
     font-family: 'Times New Roman';
-    font-size: 30px;
+    font-size: 20px;
     height:30px;
-    width: 1000px;   
+    width: 740px;   
     transform:translate(10px, 0px);      
 }
 #title-bottom
@@ -43,17 +43,17 @@ html, body, #wrapper
     position: absolute;
     top:0px;
     height:200px;
-    width: 1000px;
-    font-size: 170px;
+    width: 740px;
+    font-size: 80px;
     font-family: 'Brush Script MT', 'Brush Script Std', cursive;   
 }
 #start-button
 {
-    height:50px;
-    width:300px;
+    height:40px;
+    width:200px;
     position: absolute;
     left: 50%;
-    top: 500px;
+    top: 250px;
     transform: translate(-50%, -50%);
 }
 #example-button
@@ -62,7 +62,7 @@ html, body, #wrapper
     width:200px;
     position: absolute;
     left: 50%;
-    top: 800px;
+    top: 500px;
     transform: translate(-50%, -50%);
 }
 #number-of-dots-selector-box
@@ -72,7 +72,7 @@ html, body, #wrapper
     text-align: center;
     position: absolute;
     left: 50%;
-    top: 600px;
+    top: 325px;
     transform: translate(-50%, -50%);
 }
 #number-of-dots-selector-box #number-of-dots-selector
@@ -90,7 +90,7 @@ html, body, #wrapper
     text-align-last: center;
     position: absolute;
     left: 50%;
-    top: 700px;
+    top: 400px;
     transform: translate(-50%, -50%);
 }
 
@@ -100,7 +100,18 @@ html, body, #wrapper
     background-color: #dba143;
     height: 100%;
     width: 100%;
+    display: none;
 }
+
+/* Example Game */
+#example-game-screen
+{
+    background-color: #dba143;
+    height: 100%;
+    width: 100%;
+    display: none;
+}
+
 .node
 {
     height:100px;
@@ -117,6 +128,9 @@ html, body, #wrapper
     width: 50px;
     position:absolute;
     transform:translate(0, 0);
+    border-top-left-radius: 50px;
+    border-bottom-left-radius: 50px;
+    background: rgba(255, 115, 0, 0.7);
 }
 .rightHalf
 {
@@ -124,7 +138,9 @@ html, body, #wrapper
     width: 50px;
     position:absolute;
     transform:translate(+50px, 0);
-    
+    border-top-right-radius: 50px;
+    border-bottom-right-radius: 50px;
+    background: rgba(255, 0, 0, 0.781);
 }
 .value
 {
@@ -138,20 +154,15 @@ html, body, #wrapper
 }
 
 
-/* Example Game */
-#example-game-screen
-{
-    background-color: #dba143;
-    height: 100%;
-    width: 100%;
-    display:none;
-}
+/* Victory Screen */
 #victory-screen
 {
     background-color: #dba143;
     height: 100%;
     width: 100%;
+    display: none;
 }
+
 #victory-text
 {
     position: absolute;

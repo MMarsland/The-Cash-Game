@@ -15,16 +15,16 @@ var nodes;
 
 function startApp()
 {
-    //app = new App();
-    //app.loadMenuScreen();
-    launchExampleGame();
+    app = new App();
+    app.loadMenuScreen();
+    //launchExampleGame();
 }
 
-/*function startGameFromMenu()
+function startGameFromMenu()
 {
     app.game.startGame(document.getElementById("number-of-dots-selector").value, document.getElementById("difficulty-selector").value);
     app.loadGameScreen();   
-}*/
+}
 
 function launchExampleGame()
 {
@@ -32,17 +32,17 @@ function launchExampleGame()
     wrapper.removeChild(wrapper.lastChild);
 
     document.getElementById("example-game-screen").style.display = "block";
-    node1 = new Node(4, [5, 9], 1);
-    node2 = new Node(-2, [6, 7], 2);
-    node3 = new Node(2, [4, 5], 3);
-    node4 = new Node(8, [3, 6], 4);
-    node5 = new Node(1, [1, 3, 7], 5);
-    node6 = new Node(1, [2, 4, 8], 6);
-    node7 = new Node(3, [2, 5, 10], 7);
-    node8 = new Node(4, [6, 11], 8);
-    node9 = new Node(5, [1, 11], 9);
-    node10 = new Node(2, [7, 11], 10);
-    node11 = new Node(3, [8, 9, 10], 11);
+    node1 = new Node2(4, [5, 9], 1);
+    node2 = new Node2(-2, [6, 7], 2);
+    node3 = new Node2(2, [4, 5], 3);
+    node4 = new Node2(8, [3, 6], 4);
+    node5 = new Node2(-1, [1, 3, 7], 5);
+    node6 = new Node2(1, [2, 4, 8], 6);
+    node7 = new Node2(3, [2, 5, 10], 7);
+    node8 = new Node2(-4, [6, 11], 8);
+    node9 = new Node2(-5, [1, 11], 9);
+    node10 = new Node2(0, [7, 11], 10);
+    node11 = new Node2(-3, [8, 9, 10], 11);
 
     nodes = [node1,node2,node3,node4,node5,node6,node7,node8,node9,node10,node11];
     for (var nodeIndex in nodes){ node = nodes[nodeIndex];
@@ -162,7 +162,7 @@ function take11()
 }
 
 
-class Node
+class Node2
 {
     constructor(value, connections, id)
     {
@@ -285,6 +285,249 @@ class Node
     {
         this.value--;
         this.presentValue();
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+class App
+{
+    constructor()
+    {
+        this.game = new Game();
+    }
+
+    loadMenuScreen()
+    {       
+        wrapper.innerHTML += ''
+        +'<div id="menu-screen">'
+        +'  <div id="title">'
+        +'      <div id="title-top">The</div>'
+        +'      <div id="title-bottom">Cash Game</div> '
+        +'  </div>'
+        +'  <button id="start-button" onclick="startGameFromMenu()">Start Game</button>'
+        +'  <div id="number-of-dots-selector-box">'
+        +'      Number of Dots:</br>'
+        +'      <input id="number-of-dots-selector" type="number" name="num_of_dots" min="2" max="10" value="2">'
+        +'  </div>'
+        +'  <div id="difficulty-selector-box">'
+        +'      Difficulty:</br>'
+        +'      <select id="difficulty-selector">'
+        +'         <option value="easy">Easy</option>'
+        +'         <option value="medium">Medium</option>'
+        +'         <option value="hard">Hard</option>'
+        +'         <option value="impossible">Probably Impossible</option>'
+        +'      </select>'
+        +'  </div>'
+        +'  <button id="example-button" onclick="launchExampleGame()">Play Example Game</button>'
+        +'</div>';
+    }
+
+    loadGameScreen()
+    {
+        wrapper.innerHTML = ''
+        +'<div id="game-screen">'
+        +'</div>';
+        this.game.prepareTree();
+    }
+
+    addNodeToScreen(node)
+    {
+        var gameScreen = document.getElementById("game-screen");
+        gameScreen.innerHTML += '<div class="node" style="left: '+node.x+'px; top: '+node.y+'px"></div>';
+        for (var connectionIndex in node.connections)
+        {
+            var connection = node.connections[connectionIndex];
+            gameScreen.innerHTML += ''
+                +'<svg height="900" width="900">'
+                +'<polyline points="'+node.x+','+node.y+' '+connection.x+','+connection.y+'" style="fill:none;stroke:black;stroke-width:6"></polyline>'
+                +'</svg>';
+        }
+    }
+}
+
+class Game
+{
+    constructor(numberOfDots, difficulty)
+    {
+        this.numberOfDots = numberOfDots;
+        this.difficulty = difficulty;
+        this.nodes =[];
+    }
+
+    startGame(num_of_dots, difficulty)
+    {
+        this.numberOfDots = num_of_dots;
+        this.difficulty = difficulty;
+        console.log("Starting The Cash Game on "+difficulty+" with "+num_of_dots+" dots!");  
+    }
+
+    prepareTree()
+    {
+        //var integers = getRandomIntegers();
+        for (var i=0;i<this.numberOfDots;i++)
+        {    
+            if (i == 0)
+            {
+                this.nodes[i] = new Node().getNextNode(true);
+            }
+            else
+            {
+                this.nodes[i] = this.nodes[i-1].getNextNode();
+            }
+        }
+    }
+
+    getRandomIntegers()
+    {
+        var integers = [];
+        for (var i=0;i<this.numberOfDots;i++)
+        {
+            integers[i] = Math.floor(Math.random() * 11) - 5;
+        }
+        switch (difficulty)
+        {
+            case "easy":
+                if (this.valuesTotal(integers) == 10)
+                    return integers;
+                break;
+            case "medium":
+                    if (this.valuesTotal(integers) == 5)
+                    return integers;
+                break;
+            case "hard":
+                    if (this.valuesTotal(integers) == 0)
+                    return integers;    
+                break;
+            case "impossible":
+                    if (this.valuesTotal(integers) == -10)
+                    return integers;    
+                break;
+        }
+        return getRandomIntegers();
+    }
+
+    valuesTotal(integers)
+    {
+        var sum = 0;
+        for (intIndex in integers)
+        {
+            sum += integers[intIndex];
+        }
+        return sum;
+    }
+}
+
+class Node
+{
+    constructor(value, connections, location)
+    {
+        this.value = (value != null) ? value : 0;
+        this.connections = (connections != null) ? connections : [];
+        this.location = (location != null) ? location : [];
+        if (location != null)
+        {
+            this.x = location[0];
+            this.y = location[1];
+        }
+    }
+
+    getNextNode(first)
+    {
+        var newNode;
+        if (first)
+        {
+            newNode = new Node(null, null, [screen.width / 2, screen.height / 2]); 
+        }
+        else
+        {
+            newNode = new Node();
+            var direction = Math.floor(Math.random() * 8);
+            switch (direction)
+            {
+                case 0:
+                    newNode.x = this.x;
+                    newNode.y = this.y - 150;
+                    break;
+                case 1:
+                    newNode.x = this.x + 150;
+                    newNode.y = this.y - 150;
+                    break;
+                case 2:
+                    newNode.x = this.x + 150;
+                    newNode.y = this.y;
+                    break;
+                case 3:
+                    newNode.x = this.x + 150;
+                    newNode.y = this.y + 150;
+                    break;
+                case 4:
+                    newNode.x = this.x;
+                    newNode.y = this.y + 150;
+                    break;
+                case 5:
+                    newNode.x = this.x - 150;
+                    newNode.y = this.y + 150;
+                    break;
+                case 6:
+                    newNode.x = this.x - 150;
+                    newNode.y = this.y;
+                    break;
+                case 7:
+                    newNode.x = this.x - 150;
+                    newNode.y = this.y - 150;
+                    break;
+            }
+            while (true)
+            {
+                for (var nodeIndex in app.game.nodes)
+                {
+                    var connected = Math.floor(Math.random() * 2);
+                    if (connected == 0)
+                    {
+                        newNode.connections.push(app.game.nodes[nodeIndex]);
+                        app.game.nodes[nodeIndex].connections.push(newNode)
+                    }
+                }
+                
+                if (newNode.connections != null && newNode.connections.length > 0)
+                {
+                    break;
+                }
+            }
+        }   
+
+        app.addNodeToScreen(newNode);
+        return newNode;
     }
 }
 
