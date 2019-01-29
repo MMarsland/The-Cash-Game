@@ -35,8 +35,7 @@ html, body, #wrapper
     font-family: 'Times New Roman';
     font-size: 20px;
     height:30px;
-    width: 740px;   
-    transform:translate(10px, 0px);      
+    width: 740px;       
 }
 #title-bottom
 {
@@ -102,6 +101,23 @@ html, body, #wrapper
     width: 100%;
     display: none;
 }
+#game-board
+{
+    position: absolute;
+    height:500px;
+    width: 1300px;
+}
+#connection-svg
+{
+    position: absolute;
+    height:500px;
+    width: 1300px;
+}
+#connection-svg > polyline
+{
+    transform: translate(50px, 50px);
+    z-index:19;
+}
 
 /* Example Game */
 #example-game-screen
@@ -117,40 +133,46 @@ html, body, #wrapper
     height:100px;
     width: 100px;
     background-color: red;
-    border: black 7px solid;
+    border: black 5px solid;
     border-radius: 100px;
     position:absolute;
-    transform:translate(-50%, -50%);
+    box-sizing: border-box;
+    z-index:20;
 }
 .leftHalf
 {
-    height: 100px;
-    width: 50px;
+    height: 90px;
+    width: 45px;
     position:absolute;
     transform:translate(0, 0);
     border-top-left-radius: 50px;
     border-bottom-left-radius: 50px;
     background: rgba(255, 115, 0, 0.7);
+    box-sizing: border-box;
 }
 .rightHalf
 {
-    height: 100px;
-    width: 50px;
+    height: 90px;
+    width: 45px;
     position:absolute;
-    transform:translate(+50px, 0);
+    transform:translate(+45px, 0);
     border-top-right-radius: 50px;
     border-bottom-right-radius: 50px;
     background: rgba(255, 0, 0, 0.781);
+    box-sizing: border-box;
 }
 .value
 {
     position:absolute;
-    transform:translate(-50%, -50%);
-    z-index: 4;
+    z-index: 21;
     font-size: 60px;
     font-family: 'Courier New', Courier, monospace;
     font-weight: bolder;
-    pointer-events: none
+    pointer-events: none;
+    margin:0;
+    text-align: center;
+    width: 90px;
+    transform: translate(0px, 12px);
 }
 
 
